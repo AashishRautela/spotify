@@ -19,7 +19,6 @@
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "husky": "^9.1.7",
     "jsonwebtoken": "^9.0.2",
     "lint-staged": "^15.4.3",
     "mongoose": "^8.12.1",
@@ -34,6 +33,6 @@
     "**/*.{js,json,md}": "prettier --write"
   },
   "devDependencies": {
-    "husky": "^8.0.0"
+    "husky": "^8.0.3"
   }
 }
