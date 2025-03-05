@@ -7,7 +7,7 @@ module.exports.validateUser = (req, res) => {
   const isValidLength = (field, maxLength) => field?.length <= maxLength;
 
   // Check for required fields
-  if (!userName || !email || !fullName || !password) {
+  if (!userName || !fullName || !password) {
     return res.status(400).json({
       success: false,
       message: 'Request data missing'
@@ -28,18 +28,18 @@ module.exports.validateUser = (req, res) => {
   }
 
   // Validate email
-  if (!validator.isEmail(trimmedEmail)) {
-    return res.status(400).json({
-      success: false,
-      message: 'Please provide a valid email address.'
-    });
-  }
-  if (!isValidLength(trimmedEmail, 50)) {
-    return res.status(400).json({
-      success: false,
-      message: 'Email cannot exceed 50 characters.'
-    });
-  }
+  // if (!validator.isEmail(trimmedEmail)) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: 'Please provide a valid email address.'
+  //   });
+  // }
+  // if (!isValidLength(trimmedEmail, 50)) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: 'Email cannot exceed 50 characters.'
+  //   });
+  // }
 
   // Validate fullName
   if (!isValidLength(trimmedFullName, 30)) {

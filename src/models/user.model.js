@@ -22,11 +22,6 @@ const userSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
       maxLength: 50,
-      validate(value) {
-        if (!validator.isEmail(value)) {
-          throw new Error('Please enter a valid email');
-        }
-      }
     },
     fullName: {
       type: String,
@@ -104,7 +99,7 @@ userSchema.methods.validatePassword = async function (password) {
 
 // 🎫 Generate Access Token
 userSchema.methods.generateAccessToken = async function () {
-  return jwt.sign({ _id: this._id, role: this.role }, process.env.JWT_KEY, {
+  return jwt.sign({ _id: this._id, role: this.role }, process.env.JWT_SECRET_KEY, {
     expiresIn: process.env.ACCESS_TOKEN_EXPIRE
   });
 };
