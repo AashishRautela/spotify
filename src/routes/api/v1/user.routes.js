@@ -18,7 +18,6 @@ router.post(
 //   ]),
   userController.registerUser
 );
-
 router.get("/profile",auth,userController.getUserProfile);
 
 module.exports=router;
