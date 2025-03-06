@@ -16,10 +16,14 @@ const songSchema = new mongoose.Schema(
     duration: {
       String: Number
     },
-    audioUrl: {
-      type: String,
-      required: true
+    audioUrls: {
+      high: { type: String },
+      low: {
+        type: String,
+        required: true
+      }
     },
+
     coverImage: {
       type: String
     },
