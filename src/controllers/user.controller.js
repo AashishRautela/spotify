@@ -29,6 +29,20 @@ module.exports.registerUser = asyncHandler(async (req, res, next) => {
   });
 });
 
+module.exports.getUserProfile = asyncHandler(async (req, res) => {
+  const user = req.user;
+  return res.status(200).json({
+    success: true,
+    message: 'User Profile fetched',
+    user: {
+      id: user._id,
+      name: user.fullName,
+      email: user.email,
+      userName:user.userName
+    }
+  });
+});
+
 module.exports.changePassword = asyncHandler(async (req, res, next) => {
   const { newPassword, oldPassword } = req.body;
   const user = req.user;
