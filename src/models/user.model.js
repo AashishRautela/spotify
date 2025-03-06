@@ -7,15 +7,7 @@ require('dotenv').config();
 
 const userSchema = new mongoose.Schema(
   {
-    userName: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      lowercase: true,
-      index: true,
-      maxLength: 20
-    },
+
     email: {
       type: String,
       unique: true,

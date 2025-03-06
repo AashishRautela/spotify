@@ -1,5 +1,5 @@
 const { v2: cloudinary } = require('cloudinary');
-require('dotenv').config({ path: 'config.env' });
+require('dotenv').config();
 const fs = require('fs');
 
 cloudinary.config({
@@ -10,7 +10,7 @@ cloudinary.config({
 
 //upload file
 const uploadFile = async (filePath) => {
-  console.log('filePath', filePath);
+  // console.log('filePath', filePath);
   try {
     if (!filePath) return null;
     const fileUrl = await cloudinary.uploader.upload(filePath, {
