@@ -17,5 +17,6 @@ router.post(
 //   ]),
   userController.registerUser
 );
+router.get("/featuredArtists",userController.featuredArtists)
 
 module.exports=router;

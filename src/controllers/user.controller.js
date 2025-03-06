@@ -5,7 +5,7 @@ const { uploadFile } = require('../services/cloudinary.js');
 
 module.exports.registerUser = asyncHandler(async (req, res, next) => {
   validateUser(req, res);
-  const { userName, email = '', fullName, password } = req.body;
+  const { userName, email = '', fullName, password, role } = req.body;
 
   //   const files = req.files;
   //   const userAvatar = files?.avatar || '';
@@ -17,7 +17,8 @@ module.exports.registerUser = asyncHandler(async (req, res, next) => {
     userName,
     email,
     fullName,
-    password
+    password,
+    role
     // avatar: avatar?.url,
     // coverImage: coverImage?.url || ''
   });
@@ -55,5 +56,18 @@ module.exports.changePassword = asyncHandler(async (req, res, next) => {
       success: false,
       message: 'Error while updating password'
     });
+  }
+});
+
+module.exports.featuredArtists = asyncHandler(async (req, res) => {
+  try {
+    const artists = await User.find({ 
+      role: 'artist', 
+      popularity: { $gt: 90 } 
+    });
+    
+    res.status(200).json(artists);
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error });
   }
 });

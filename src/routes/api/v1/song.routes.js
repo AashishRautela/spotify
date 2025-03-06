@@ -18,7 +18,8 @@ router.post("/",upload.fields([
         maxCount: 1
     }
 ]),songController.uploadSong)
-
+router.get("/",songController.getAllSongs)
+router.get("/top15",songController.getWeeklyTop15)
 
 
 module.exports= router

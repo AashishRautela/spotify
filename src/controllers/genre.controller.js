@@ -1,5 +1,5 @@
-const Genre = require("../models/genre.model.js");
-const {asyncHandler} = require("../utils/asyncHandler.js");
+const Genre = require('../models/genre.model.js');
+const { asyncHandler } = require('../utils/asyncHandler.js');
 
 // Bulk upload genres
 exports.bulkUploadGenres = asyncHandler(async (req, res) => {
@@ -8,7 +8,7 @@ exports.bulkUploadGenres = asyncHandler(async (req, res) => {
   if (!genres || !Array.isArray(genres) || genres.length === 0) {
     return res.status(400).json({
       success: false,
-      message: "Please provide a valid array of genres"
+      message: 'Please provide a valid array of genres'
     });
   }
 
@@ -25,7 +25,20 @@ exports.bulkUploadGenres = asyncHandler(async (req, res) => {
     // Handle errors such as duplicate entries
     return res.status(500).json({
       success: false,
-      message: error.message || "An error occurred while uploading genres"
+      message: error.message || 'An error occurred while uploading genres'
     });
+  }
+});
+
+exports.getGenre = asyncHandler(async (req, res) => {
+  try {
+    const genre = await Genre.find();
+    if (!genre)
+      return res
+        .status(201)
+        .json({ success: false, message: 'no genre found' });
+    return res.status(200).json(genre);
+  } catch (error) {
+    return res.status(500).json({ success: false, message: 'server error ' });
   }
 });

@@ -1,4 +1,4 @@
-const {asyncHandler} = require('../utils/asyncHandler.js');
+const { asyncHandler } = require('../utils/asyncHandler.js');
 const Song = require('../models/song.model.js');
 const { uploadFile } = require('../services/cloudinary.js');
 
@@ -58,4 +58,56 @@ module.exports.uploadSong = asyncHandler(async (req, res) => {
     message: 'Song uploaded successfully!',
     song: newSong
   });
+});
+
+module.exports.getWeeklyTop15 = asyncHandler(async (req, res) => {
+  try {
+    // Fetch the top 15 songs sorted by the 'plays' field in descending order
+    const top15 = await Song.find().sort({ plays: -1 }).limit(15);
+
+    if (!top15 || top15.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No songs found.'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Top 15 songs retrieved successfully.',
+      data: top15
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'An error occurred while retrieving songs.'
+    });
+  }
+});
+
+module.exports.getAllSongs = asyncHandler(async (req, res) => {
+  try {
+    // Fetch all songs from the database
+    const allSongs = await Song.find()
+      .populate('artist', 'fullName') 
+      .populate('genre', 'name'); // Optionally populate genre details
+
+    if (!allSongs || allSongs.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No songs found.'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'All songs retrieved successfully.',
+      data: allSongs
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'An error occurred while retrieving songs.'
+    });
+  }
 });

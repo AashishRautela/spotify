@@ -15,12 +15,11 @@ const albumSchema = new mongoose.Schema(
     },
     coverImage: {
       type: String,
-      required: true
+ 
     },
     genre: {
-      type: String,
-      required: true,
-      trim: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Genre'
     },
     releaseDate: {
       type: Date,
@@ -28,8 +27,9 @@ const albumSchema = new mongoose.Schema(
     },
     isPublished: {
       type: Boolean,
-      default: false
-    }
+      default: true
+    },
+    songs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Song' }]
   },
   { timestamps: true }
 );

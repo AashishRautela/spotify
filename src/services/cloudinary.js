@@ -17,7 +17,7 @@ const uploadFile = async (filePath) => {
       resource_type: 'auto'
     });
     fs.unlinkSync(filePath);
-    console.log('fileUrl', fileUrl);
+    // console.log('fileUrl', fileUrl);
     return fileUrl;
   } catch (error) {
     fs.unlinkSync(filePath);

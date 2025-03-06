@@ -8,6 +8,10 @@ const songSchema = new mongoose.Schema(
       index: true,
       trim: true
     },
+    rank:{
+      type:String,
+      default:0
+    },
     artist: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -28,7 +32,8 @@ const songSchema = new mongoose.Schema(
       type: String
     },
     genre: {
-      type: String
+      type: mongoose.Types.ObjectId,
+      ref:"Genre"
     },
     plays: {
       type: Number,
