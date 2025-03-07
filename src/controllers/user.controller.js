@@ -85,3 +85,20 @@ module.exports.featuredArtists = asyncHandler(async (req, res) => {
     res.status(500).json({ message: "Server Error", error });
   }
 });
+
+
+module.exports.updateUser=asyncHandler(async(req,res)=>{
+
+  // const allowedFields = [
+  //   'type',
+
+  // ];
+
+  
+  // const filteredUpdates = Object.keys(fields).reduce((acc, key) => {
+  //   if (allowedFields.includes(key)) {
+  //     acc[key] = fields[key];
+  //   }
+  //   return acc;
+  // }, {});
+})

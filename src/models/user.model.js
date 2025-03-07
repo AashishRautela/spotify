@@ -7,13 +7,12 @@ require('dotenv').config();
 
 const userSchema = new mongoose.Schema(
   {
-
     email: {
       type: String,
       unique: true,
       trim: true,
       lowercase: true,
-      maxLength: 50,
+      maxLength: 50
     },
     fullName: {
       type: String,
@@ -29,8 +28,12 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'artist'],
+      enum: ['user', 'artist','admin'],
       default: 'user'
+    },
+    isFeatured: {
+      type: Boolean,
+      default: false
     },
     avatar: {
       type: String,
@@ -91,9 +94,13 @@ userSchema.methods.validatePassword = async function (password) {
 
 // 🎫 Generate Access Token
 userSchema.methods.generateAccessToken = async function () {
-  return jwt.sign({ _id: this._id, role: this.role }, process.env.JWT_SECRET_KEY, {
-    expiresIn: process.env.ACCESS_TOKEN_EXPIRE
-  });
+  return jwt.sign(
+    { _id: this._id, role: this.role },
+    process.env.JWT_SECRET_KEY,
+    {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRE
+    }
+  );
 };
 
 // 🔄 Generate Refresh Token

@@ -17,7 +17,7 @@ module.exports.uploadSong = asyncHandler(async (req, res) => {
   const lowAudioPath = files.low[0].path;
   const lowAudioUrl = await uploadFile(lowAudioPath); // Cloudinary upload for 'low'
   const lowUrl = lowAudioUrl ? lowAudioUrl.secure_url : '';
-
+console.log("Low URL : ",lowAudioUrl)
   // Upload the 'high' audio file if it exists
   let highUrl = '';
   if (files.high && files.high.length > 0) {
@@ -37,16 +37,18 @@ module.exports.uploadSong = asyncHandler(async (req, res) => {
   // Prepare the data to be saved in the Song model
   const newSong = new Song({
     title: body.title,
-    artist: body.artist, // Assuming 'artist' is provided as an ObjectId (from a form or frontend)
-    duration: highUrl.duration,
+    artist: body.artist, 
+    duration: lowAudioUrl.duration/60,
     audioUrls: {
       low: lowUrl,
       high: highUrl
     },
+    album:body.album,
     coverImage: coverImageUrl,
     genre: body.genre,
     plays: 0, // Optional: Can be dynamically set or start from 0
     isPublished: body.isPublished || true // Default to true
+    
   });
 
   // Save the song in the database

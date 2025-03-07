@@ -20,6 +20,11 @@ const songSchema = new mongoose.Schema(
     duration: {
       String: Number
     },
+    album:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Album"
+
+    },
     audioUrls: {
       high: { type: String },
       low: {

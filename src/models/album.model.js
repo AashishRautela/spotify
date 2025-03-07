@@ -13,9 +13,11 @@ const albumSchema = new mongoose.Schema(
       ref: 'User',
       required: true
     },
+    company: {
+      type: String
+    },
     coverImage: {
-      type: String,
- 
+      type: String
     },
     genre: {
       type: mongoose.Schema.Types.ObjectId,
@@ -28,6 +30,14 @@ const albumSchema = new mongoose.Schema(
     isPublished: {
       type: Boolean,
       default: true
+    },
+    isFeatured: {
+      type: Boolean,
+      default: false
+    },
+    isTranding: {
+      type: Boolean,
+      default: false
     },
     songs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Song' }]
   },
